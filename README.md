@@ -1,2 +1,3 @@
 # matrix-effect
-js, html
+javascript, html - matrix effect on fullpage
+
