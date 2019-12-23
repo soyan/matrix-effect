@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Matrix effect</title>
+
+    <style>
+        @font-face {
+            font-family: TheMatrix;
+            src: url("font/matrix code nfi.ttf");
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        function start(q) {
+            var s = window.screen;
+            var width = q.width = s.width;
+            var height = q.height = s.height;
+
+            var letters = Array(256);
+            var spdidx = Array(256);
+
+            for (let index = 0; index < letters.length; index++) {
+                letters[index] = Math.round(Math.random() * 250);
+                spdidx[index] = Math.random() * 0.95;
+            }
+
+            var draw = function () {
+                ctx = q.getContext("2d");
+                ctx.shadowColor = "black";
+                ctx.fillStyle = 'rgba(0,0,0,.05)';
+                ctx.fillRect(0, 0, width, height);
+                ctx.fillStyle = '#2F4';
+
+                letters.map(function (y_pos, index) {
+                    symbol = String.fromCharCode(33 + Math.random() * 93);
+                    if (symbol == '@') { symbol = String.fromCharCode(65 + Math.random() * 60) }
+                    x_pos = index * 30;
+                    ry_pos = y_pos * spdidx[index];
+                    ctx.font = "bold 22pt TheMatrix";
+                    ctx.fillText(symbol, x_pos, ry_pos);
+                    letters[index] = (y_pos > 258 + Math.random() * 1e4) ? 0 : y_pos + 30;
+                });
+
+            };
+            setInterval(draw, 50);
+        }
+
+        function onLoad() {
+            var canvas = document.getElementById("canvas");
+            start(canvas);
+        }
+    </script>
+</head>
+
+<body onload="onLoad();">
+    <canvas id="canvas"></canvas>
+</body>
+
+</html>
