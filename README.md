@@ -1,2 +1,2 @@
 # matrix-effect
-javascript, html - matrix effect on fullpage (on canvas)
+javascript, html - fullpage matrix effect (on canvas)
